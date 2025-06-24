@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+
+# Logs
+logs/*.json
+
+# Environment files
+.env
+
+# Mac / Unix files
+.DS_Store
+
+# PyInstaller
+*.spec
+dist/
+build/
+
+# PDFs or test samples
+samples/*
+!samples/.keep
