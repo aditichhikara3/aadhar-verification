@@ -38,8 +38,14 @@ def verify():
         aadhar_path = 'temp_aadhar.jpg'
         if aadhar_file.filename.lower().endswith('.pdf'):
             aadhar_file.save('temp_aadhar.pdf')
-            pages = convert_from_path('temp_aadhar.pdf')
-            pages[0].save(aadhar_path, 'JPEG')
+            try:
+                pages = convert_from_path('temp_aadhar.pdf', dpi=300)
+                if pages:
+                    pages[0].convert('RGB').save(aadhar_path, 'JPEG')
+                else:
+                    raise ValueError("No pages found in uploaded PDF.")
+            except Exception as e:
+                return jsonify({"error": f"Failed to convert PDF: {str(e)}"}), 500
         else:
             aadhar_file.save(aadhar_path)
 
@@ -101,6 +107,7 @@ def verify():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
