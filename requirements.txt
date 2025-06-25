@@ -7,3 +7,5 @@ face_recognition
 numpy
 scikit-learn
 python-dotenv
+start
+gunicon
