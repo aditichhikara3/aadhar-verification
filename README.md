@@ -3,6 +3,7 @@ Aadhar-based Age & Identity Verification
 This application verifies age and identity using an Aadhar image (or PDF) and a live selfie. It
 extracts the date of birth, checks if the person is 18+, compares the ID photo with a selfie, and gives
 quality feedback.
+
 Features
 - OCR for extracting DOB and ID photo.
 - Face comparison between Aadhar photo and live selfie.
