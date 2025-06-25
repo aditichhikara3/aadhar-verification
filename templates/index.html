@@ -5,41 +5,52 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 30px;
-            background: #f5f5f5;
-        }
-        h1 {
+            margin: 20px;
+            background-color: #f4f4f4;
             color: #333;
         }
         form {
-            background: #fff;
+            background-color: #fff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
         }
-        label {
-            display: block;
-            margin-top: 15px;
+        h1 {
+            text-align: center;
         }
-        input[type="file"], button {
-            margin-top: 10px;
-        }
-        video, canvas {
-            max-width: 300px;
+        label, video, canvas {
             display: block;
             margin: 10px 0;
+            max-width: 100%;
         }
-        #resultBox {
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            white-space: pre-wrap;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .accepted { color: green; font-weight: bold; }
-        .rejected { color: red; font-weight: bold; }
+        .feedback-list {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -56,7 +67,7 @@
         <button type="submit">Verify</button>
     </form>
 
-    <div id="resultBox"></div>
+    <pre id="result"></pre>
 
     <script>
         const video = document.getElementById('video');
@@ -86,21 +97,17 @@
             const res = await fetch('/verify', { method: 'POST', body: formData });
             const json = await res.json();
 
-            let resultHTML = `<p><strong>Status:</strong> <span class="${json.status.includes('Accepted') ? 'accepted' : 'rejected'}">${json.status}</span></p>`;
-            resultHTML += `<p><strong>Message:</strong> ${json.message}</p>`;
-            resultHTML += `<p><strong>Confidence:</strong> ${json.confidence}</p>`;
-            resultHTML += `<p><strong>DOB:</strong> ${json.dob || 'N/A'}</p>`;
-            resultHTML += `<p><strong>Age:</strong> ${json.age !== null ? json.age : 'N/A'}</p>`;
+            let displayText = `Status: ${json.status || 'N/A'}\n\n` +
+                              `Message: ${json.message || 'N/A'}\n\n` +
+                              `Confidence: ${json.confidence || 'N/A'}\n\n` +
+                              `DOB: ${json.dob || 'N/A'}\n\n` +
+                              `Age: ${json.age || 'N/A'}`;
 
             if (json.quality_feedback && json.quality_feedback.length > 0) {
-                resultHTML += `<p><strong>Photo Feedback:</strong><ul>`;
-                json.quality_feedback.forEach(msg => {
-                    resultHTML += `<li>${msg}</li>`;
-                });
-                resultHTML += `</ul></p>`;
+                displayText += "\n\nPhoto Quality Feedback:\n" + json.quality_feedback.map(f => `- ${f}`).join("\n");
             }
 
-            document.getElementById('resultBox').innerHTML = resultHTML;
+            document.getElementById('result').textContent = displayText;
         }
     </script>
 </body>
