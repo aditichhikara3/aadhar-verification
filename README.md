@@ -9,6 +9,7 @@ Features
 - Simple web interface.
 - Logs verification attempts.
 - Supports Aadhar in image or PDF format.
+
 How to Run (Development)
 1. Clone this repository
 git clone <your-repo-url>
@@ -36,7 +37,9 @@ On submitting Aadhar + selfie, it shows:
 - Feedback if selfie is blurry or poorly lit
 Logs
 All attempts are saved in logs/attempts.json for auditing or analytics.
+
 Build Executable Binary
+
 You can package the app as a standalone executable:
 1. Install PyInstaller
 pip install pyinstaller
