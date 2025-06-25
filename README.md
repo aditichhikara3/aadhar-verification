@@ -46,11 +46,13 @@ You can package the app as a standalone executable:
 1. Install PyInstaller
 pip install pyinstaller
 2. Build
+   
 pyinstaller --noconfirm --onefile --add-data "templates:templates" --add-data "models:models"
 --add-data "static:static" app.py
 The binary will be in dist/app.
-3. Run the Binary
+4. Run the Binary
 ./dist/app
+
 Notes
 - This is a prototype; do not use in production without securing file uploads and improving spoof
 detection.
