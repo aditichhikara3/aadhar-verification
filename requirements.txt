@@ -1,11 +1,10 @@
 flask
+gunicorn
 opencv-python
 pytesseract
 pdf2image
-pillow
-face_recognition
+Pillow
+dlib
 numpy
 scikit-learn
 python-dotenv
-start
-gunicon
