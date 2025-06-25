@@ -67,12 +67,21 @@ Go to http://127.0.0.1:5000 in your browser.
 
 {
   "status": "✅ Accepted",
+  
   "message": "Accepted: ID and selfie match with sufficient confidence.",
+  
   "confidence": "87.21% match",
+  
   "dob": "2004-09-03",
+  
   "age": 20,
+  
   "is_18_plus": true,
+  
   "is_face_match": true,
+  
   "quality_feedback": [],
+  
   "verified": true
+  
 }
